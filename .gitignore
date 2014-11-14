@@ -1,0 +1,17 @@
+target
+*.class
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# output from transcompilers
+_build
+
+# IDE files
+.*.sw?
+.idea
+*.iml
+.settings
+.classpath
+.project
+tags
