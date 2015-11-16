@@ -36,6 +36,7 @@ package org.druf.trans.php.adapter.java.lang;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.nio.charset.Charset;
 import java.util.List;
 
 import com.sun.source.tree.InstanceOfTree;
@@ -52,7 +53,8 @@ public class StringPhpAdapter extends ScalarPhpAdapter
 	@Override
 	public VisitResult		processNewInstance(Class<?> clazz, Constructor<?> constructor, List<VisitResult> arguments, NewClassTree node, Trees trees)
 	{
-		if (arguments.size() == 1 && arguments.get(0).getResultClass() == byte[].class) {
+		if ((arguments.size() == 1 && arguments.get(0).getResultClass() == byte[].class) ||
+				(arguments.size() == 2 && arguments.get(0).getResultClass() == byte[].class && arguments.get(1).getResultClass() == Charset.class)) {
 			StringBuilder sb = new StringBuilder("(");
 			sb.append(arguments.get(0).getContent());
 			sb.append(")");
