@@ -162,6 +162,11 @@ public abstract class TransVisitor extends TreePathScanner<VisitResult, Trees>
 		arrayIds.put("char", "C");
 	}
 
+	public void			setTransRoot(String transRoot)
+	{
+		this.transRoot = transRoot;
+	}
+
 	public void			init()
 	{
 		if (logger == null)
@@ -785,7 +790,7 @@ public abstract class TransVisitor extends TreePathScanner<VisitResult, Trees>
 	public boolean			processOver(Trees trees)
 	{
 		for (Map.Entry<String, String> codeEntry: this.codeOutput.entrySet()) {
-			String fileName = "trans/"+getSuffix()+"/_build/"+codeEntry.getKey().replaceAll("\\.java$", "").replace(".", "/")+"."+getSuffix();
+			String fileName = transRoot+"/_build/"+codeEntry.getKey().replaceAll("\\.java$", "").replace(".", "/")+"."+getSuffix();
 			byte[] current = codeEntry.getValue().getBytes(Charsets.UTF_8);
 			try {
 				byte[] old = FileUtils.readFileToByteArray(new File(fileName));
@@ -2387,6 +2392,8 @@ public abstract class TransVisitor extends TreePathScanner<VisitResult, Trees>
 	}
 
 	protected Logger		logger;
+
+	protected String		transRoot;
 
 	protected ProcessingEnvironment	processingEnv;
 

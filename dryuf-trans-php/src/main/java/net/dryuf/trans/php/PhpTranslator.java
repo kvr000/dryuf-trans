@@ -59,7 +59,7 @@ public class PhpTranslator extends java.lang.Object
 
 		if (args.length-parameterIndex != 2) {
 			System.err.println("Two parameters required: trans-root files-list-file");
-			System.exit(126);
+			System.exit(125);
 		}
 		String transPath = args[parameterIndex+0];
 		String transFile = args[parameterIndex+1];

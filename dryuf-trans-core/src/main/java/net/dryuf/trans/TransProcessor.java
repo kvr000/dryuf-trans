@@ -91,7 +91,7 @@ public abstract class TransProcessor extends AbstractProcessor
 		if (!targetDir.endsWith("/"))
 			targetDir += "/";
 		Pattern emptyPattern = Pattern.compile("^(#.*|\\s*)$");
-		Pattern javaPattern = Pattern.compile("^([^/]+/[^/]+/java/((.+/)([^/]+).java))\n*$");
+		Pattern javaPattern = Pattern.compile("^((?:[^/]+/[^/]+/java/|target/generated-sources/)((.+/)([^/]+).java))\n*$");
 		List<String> filesList = new LinkedList<String>();
 		for (String fileName: IOUtils.readLines(filesListStream)) {
 			Matcher matcher;
@@ -134,8 +134,10 @@ public abstract class TransProcessor extends AbstractProcessor
 		return results;
 	}
 
-	public void			runCompiler(List<String> files)
+	public void			runCompiler(String transRoot, List<String> files)
 	{
+		this.transRoot = transRoot;
+
 		//Get an instance of java compiler
 		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 //		JavaCompiler compiler = new EclipseCompiler();
@@ -169,7 +171,7 @@ public abstract class TransProcessor extends AbstractProcessor
 	{
 		Process proc;
 		try {
-			proc = Runtime.getRuntime().exec("diff -urN --exclude=*.class --exclude=*.java --exclude=*.sw? "+transDirectory+"old/ "+transDirectory+"_build/");
+			proc = Runtime.getRuntime().exec("diff -urN --exclude=*.class --exclude=*.java --exclude=*.sw? "+transDirectory+"direct/ "+transDirectory+"_build/");
 			FileUtils.copyInputStreamToFile(proc.getInputStream(), new File(transDirectory+"_trans.diff"));
 			IOUtils.copy(proc.getErrorStream(), System.err);
 			int err = proc.waitFor();
@@ -185,14 +187,14 @@ public abstract class TransProcessor extends AbstractProcessor
 		}
 	}
 
-	public void			runFull(String transPath, String transFile, Map<String, Object> options)
+	public void			runFull(String transRoot, String transFile, Map<String, Object> options)
 	{
-		if (!transPath.isEmpty() && !transPath.endsWith("/"))
-			transPath += "/";
+		if (!transRoot.isEmpty() && !transRoot.endsWith("/"))
+			transRoot += "/";
 
 		List<String> files;
 		try {
-			files = copyFiles(transPath, new FileInputStream(transFile));
+			files = copyFiles(transRoot, new FileInputStream(transFile));
 		}
 		catch (FileNotFoundException e) {
 			throw new RuntimeException(e);
@@ -203,8 +205,8 @@ public abstract class TransProcessor extends AbstractProcessor
 		if (!(Boolean)options.getOrDefault("force", false))
 			files = filterListByTime(files);
 		if (!files.isEmpty())
-			runCompiler(files);
-		runDiff(transPath);
+			runCompiler(transRoot, files);
+		runDiff(transRoot);
 	}
 
 	@Override
@@ -246,10 +248,13 @@ public abstract class TransProcessor extends AbstractProcessor
 		return logger;
 	}
 
+	protected String		transRoot;
+
 	protected String		targetSuffix;
 
 	protected Logger		logger;
 
-	TransVisitor			visitor;
+	protected TransVisitor		visitor;
+
 	private Trees			trees;
 }

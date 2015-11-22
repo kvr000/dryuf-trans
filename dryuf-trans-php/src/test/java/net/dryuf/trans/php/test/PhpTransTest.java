@@ -64,7 +64,7 @@ public class PhpTransTest extends java.lang.Object
 		String path = FilenameUtils.getPath(filename);
 		String base = FilenameUtils.getBaseName(filename);
 		new File(BUILD_PATH+path+base+".php").delete();
-		(new PhpTransProcessor()).runCompiler(Arrays.asList(new String[]{
+		(new PhpTransProcessor()).runCompiler("trans/php/", Arrays.asList(new String[]{
 			SRC_PATH+filename
 		}));
 		Assert.assertTrue("translation comparison failed: diff "+CMP_PATH+path+"cmp-"+base+".php "+BUILD_PATH+path+base+".php",
@@ -75,7 +75,7 @@ public class PhpTransTest extends java.lang.Object
 	public void			testBasicTranslation() throws FileNotFoundException, IOException
 	{
 		new File("trans/php/_build/net/dryuf/trans/php/test/PhpTransTested.php").delete();
-		(new PhpTransProcessor()).runCompiler(Arrays.asList(new String[]{
+		(new PhpTransProcessor()).runCompiler("trans/php/", Arrays.asList(new String[]{
 			"src/test/java/net/dryuf/trans/php/test/PhpTransTested.java"
 		}));
 		Assert.assertTrue("translation comparison failed: diff src/test/resources/net/dryuf/trans/php/test/cmp-PhpTransTested.php trans/php/_build/net/dryuf/trans/php/test/PhpTransTested.php",
@@ -92,7 +92,7 @@ public class PhpTransTest extends java.lang.Object
 	public void			testEnumTranslation() throws FileNotFoundException, IOException
 	{
 		new File("trans/php/_build/net/dryuf/trans/php/test/PhpTransTestedEnum.php").delete();
-		(new PhpTransProcessor()).runCompiler(Arrays.asList(new String[]{
+		(new PhpTransProcessor()).runCompiler("trans/php/", Arrays.asList(new String[]{
 			"src/test/java/net/dryuf/trans/php/test/PhpTransTestedEnum.java"
 		}));
 		Assert.assertTrue("translation comparison failed: diff src/test/resources/net/dryuf/trans/php/test/cmp-PhpTransTestedEnum.php trans/php/_build/net/dryuf/trans/php/test/PhpTransTestedEnum.php",
@@ -103,7 +103,7 @@ public class PhpTransTest extends java.lang.Object
 	public void			testTypedTranslation() throws FileNotFoundException, IOException
 	{
 		new File("trans/php/_build/net/dryuf/trans/php/test/PhpTransTestedTyped.php").delete();
-		(new PhpTransProcessor()).runCompiler(Arrays.asList(new String[]{
+		(new PhpTransProcessor()).runCompiler("trans/php/", Arrays.asList(new String[]{
 			"src/test/java/net/dryuf/trans/php/test/PhpTransTestedTyped.java"
 		}));
 		Assert.assertTrue("translation comparison failed: diff src/test/resources/net/dryuf/trans/php/test/cmp-PhpTransTestedTyped.php trans/php/_build/net/dryuf/trans/php/test/PhpTransTestedTyped.php",
@@ -114,7 +114,7 @@ public class PhpTransTest extends java.lang.Object
 	public void			testTypeParams() throws FileNotFoundException, IOException
 	{
 		new File("trans/php/_build/net/dryuf/trans/php/test/PhpTransTestedTypeParams.php").delete();
-		(new PhpTransProcessor()).runCompiler(Arrays.asList(new String[]{
+		(new PhpTransProcessor()).runCompiler("trans/php/", Arrays.asList(new String[]{
 			"src/test/java/net/dryuf/trans/php/test/PhpTransTestedTypeParams.java"
 		}));
 		Assert.assertTrue("translation comparison failed: diff src/test/resources/net/dryuf/trans/php/test/cmp-PhpTransTestedTypeParams.php trans/php/_build/net/dryuf/trans/php/test/PhpTransTestedTypeParams.php",

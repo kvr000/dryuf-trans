@@ -86,6 +86,7 @@ public class PhpTransProcessor extends TransProcessor
 	{
 		PhpTransVisitor visitor = new PhpTransVisitor(pe);
 		visitor.setLogger(getLogger());
+		visitor.setTransRoot(transRoot);
 		visitor.init();
 		return visitor;
 	}
