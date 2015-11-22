@@ -103,10 +103,10 @@ public class StringPhpAdapter extends ScalarPhpAdapter
 			sb.append("))");
 		}
 		else if (method.getName().equals("charAt")) {
-			sb.append("\\net\\dryuf\\core\\StringWrap::charAt(");
+			sb.append("substr(");
 			sb.append(path.getContent()).append(", ");
 			appendArgumentsDirect(sb, node.getArguments(), trees);
-			sb.append(")");
+			sb.append(", 1)");
 		}
 		else if (method.getName().equals("format")) {
 			sb.append("sprintf(");
@@ -148,25 +148,25 @@ public class StringPhpAdapter extends ScalarPhpAdapter
 			sb.append(")");
 		}
 		else if (method.getName().equals("replaceAll")) {
-			sb.append("\\net\\dryuf\\core\\StringWrap::replaceRegExp(");
+			sb.append("\\net\\dryuf\\core\\StringUtil::replaceRegExp(");
 			sb.append(path.getContent()).append(", ");
 			appendArgumentsDirect(sb, node.getArguments(), trees);
 			sb.append(")");
 		}
 		else if (method.getName().equals("matches")) {
-			sb.append("\\net\\dryuf\\core\\StringWrap::matchRegExp(");
+			sb.append("\\net\\dryuf\\core\\StringUtil::matchRegExp(");
 			sb.append(path.getContent()).append(", ");
 			appendArgumentsDirect(sb, node.getArguments(), trees);
 			sb.append(")");
 		}
 		else if (method.getName().equals("indexOf")) {
-			sb.append("\\net\\dryuf\\core\\StringWrap::indexOf(");
+			sb.append("\\net\\dryuf\\core\\StringUtil::indexOf(");
 			sb.append(path.getContent()).append(", ");
 			appendArgumentsDirect(sb, node.getArguments(), trees);
 			sb.append(")");
 		}
 		else if (method.getName().equals("lastIndexOf")) {
-			sb.append("\\net\\dryuf\\core\\StringWrap::lastIndexOf(");
+			sb.append("\\net\\dryuf\\core\\StringUtil::lastIndexOf(");
 			sb.append(path.getContent()).append(", ");
 			appendArgumentsDirect(sb, node.getArguments(), trees);
 			sb.append(")");
@@ -195,7 +195,7 @@ public class StringPhpAdapter extends ScalarPhpAdapter
 			sb.append(")");
 		}
 		else if (method.getName().equals("split")) {
-			sb.append("\\net\\dryuf\\core\\StringWrap::splitRegExp(");
+			sb.append("\\net\\dryuf\\core\\StringUtil::splitRegExp(");
 			sb.append(path.getContent()).append(", ");
 			appendArgumentsDirect(sb, node.getArguments(), trees);
 			sb.append(")");

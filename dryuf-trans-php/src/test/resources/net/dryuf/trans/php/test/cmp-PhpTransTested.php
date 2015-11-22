@@ -251,13 +251,13 @@ class PhpTransTested extends \net\dryuf\core\Object implements \java\lang\Compar
 	public function			tryTest()
 	{
 		try {
-			\net\dryuf\core\StringWrap::charAt(self::$str, 0);
+			substr(self::$str, 0, 1);
 		}
 		catch (\net\dryuf\core\Exception $ex) {
 			throw new \net\dryuf\core\RuntimeException($ex);
 		}
 		try {
-			return \net\dryuf\core\StringWrap::charAt(self::$str, 0);
+			return substr(self::$str, 0, 1);
 		}
 		finally {
 			$this->magic++;
