@@ -991,6 +991,7 @@ public class PhpTransVisitor extends CLikeTransVisitor
 		"java.util.LinkedHashSet",			net.dryuf.trans.php.adapter.java.util.PhpHashSetPhpAdapter.class,
 		"java.util.Collections",			net.dryuf.trans.php.adapter.java.util.CollectionsPhpAdapter.class,
 		"java.util.Arrays",				net.dryuf.trans.php.adapter.java.util.ArraysPhpAdapter.class,
+		"java.util.Objects",				net.dryuf.trans.php.adapter.java.util.ObjectsPhpAdapter.class,
 
 		"org.w3c.dom.Document",				net.dryuf.trans.php.adapter.org.w3c.dom.DocumentPhpAdapter.class,
 		"org.w3c.dom.Element",				net.dryuf.trans.php.adapter.org.w3c.dom.ElementPhpAdapter.class,
