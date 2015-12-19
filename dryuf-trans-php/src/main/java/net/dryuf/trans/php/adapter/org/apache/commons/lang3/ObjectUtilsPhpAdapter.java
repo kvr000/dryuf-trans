@@ -59,8 +59,8 @@ public class ObjectUtilsPhpAdapter extends BasicPhpAdapter
 			sb.append(")");
 			return new VisitResult(sb.toString());
 		}
-		else if (method.getName().equals("compareTo")) {
-			sb.append("\\net\\dryuf\\core\\Dryuf::compareToObjectsSafe(");
+		else if (method.getName().equals("compare")) {
+			sb.append("\\net\\dryuf\\core\\Dryuf::compareObjectsSafe(");
 			appendArgumentsDirect(sb, node.getArguments(), trees);
 			if (arguments.size() == 1)
 				sb.append(", ''");

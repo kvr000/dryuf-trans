@@ -70,7 +70,7 @@ class PhpTransTestedCollections extends \net\dryuf\core\Object
 	*/
 	public function			mapMethods()
 	{
-		(new \net\dryuf\util\php\StringNativeHashMap())->forEachDo(function ($key, $key) { return strlen($value); });
+		(new \net\dryuf\util\php\StringNativeHashMap())->forEachDo(function ($key, $value) { return strlen($value); });
 		return 0;
 	}
 };

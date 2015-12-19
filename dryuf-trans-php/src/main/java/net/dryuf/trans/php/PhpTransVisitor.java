@@ -505,7 +505,7 @@ public class PhpTransVisitor extends CLikeTransVisitor
 				BoundType argBound = this.resolveBoundType(par.getType());
 				signature.add(argBound);
 				this.addIdentifier(IdentifierDef.createVariable(par.getName().toString(), argBound));
-				sb.append("$").append(node.getParameters().get(0).getName());
+				sb.append("$").append(node.getParameters().get(count-1).getName());
 			}
 		}
 		sb.append(") ");
@@ -579,7 +579,7 @@ public class PhpTransVisitor extends CLikeTransVisitor
 			return new VisitResult(sb);
 		}
 		else if (method.getName().equals("equals") && method.getParameterTypes().length == 1) {
-			sb.append("\\net\\dryuf\\core\\Dryuf::equalsObject(");
+			sb.append("\\net\\dryuf\\core\\Dryuf::equalObjects(");
 			sb.append(!path.isNull() ? path.getContent() : "$this");
 			sb.append(", ");
 			appendArguments(sb, method, arguments);
