@@ -50,7 +50,7 @@ public class ObjectsPhpAdapter extends BasicPhpAdapter
 	{
 		StringBuilder sb = new StringBuilder();
 		if (method.getName().equals("requireNonNull")) {
-			sb.append("\\net\\dryuf\\Dryuf::assertNotNull(");
+			sb.append("\\net\\dryuf\\core\\Dryuf::assertNotNull(");
 			appendArguments(sb, method, arguments);
 			sb.append(")");
 			return new VisitResult(sb.toString());
