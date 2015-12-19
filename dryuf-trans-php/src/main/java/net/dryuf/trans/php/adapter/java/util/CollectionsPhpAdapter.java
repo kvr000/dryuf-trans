@@ -65,7 +65,7 @@ public class CollectionsPhpAdapter extends BasicPhpAdapter
 			return new VisitResult(sb.toString()).updateExpressionPriority(visitor.getPriorityNew());
 		}
 		else if (method.getName().equals("reverseOrder")) {
-			sb.append("function ($a, $b) { return \\net\\dryuf\\core\\Dryuf::compareToObject($b, $a); }");
+			sb.append("function ($a, $b) { return \\net\\dryuf\\core\\Dryuf::compareObjects($b, $a); }");
 			return new VisitResult(sb.toString());
 		}
 		else if (method.getName().equals("sort")) {
