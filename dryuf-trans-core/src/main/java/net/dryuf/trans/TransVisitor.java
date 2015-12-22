@@ -69,7 +69,7 @@ import net.dryuf.trans.proxy.ParameterizedTypeAndExpressionTreeProxy;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.codec.Charsets;
+import java.nio.charset.StandardCharsets;
 
 import com.sun.source.tree.AnnotationTree;
 import com.sun.source.tree.ArrayAccessTree;
@@ -791,7 +791,7 @@ public abstract class TransVisitor extends TreePathScanner<VisitResult, Trees>
 	{
 		for (Map.Entry<String, String> codeEntry: this.codeOutput.entrySet()) {
 			String fileName = transRoot+"/_build/"+codeEntry.getKey().replaceAll("\\.java$", "").replace(".", "/")+"."+getSuffix();
-			byte[] current = codeEntry.getValue().getBytes(Charsets.UTF_8);
+			byte[] current = codeEntry.getValue().getBytes(StandardCharsets.UTF_8);
 			try {
 				byte[] old = FileUtils.readFileToByteArray(new File(fileName));
 				if (Arrays.equals(current, old))
