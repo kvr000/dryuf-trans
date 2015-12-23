@@ -132,4 +132,10 @@ public class PhpTransTest extends java.lang.Object
 	{
 		runSingleFileTest("net/dryuf/trans/php/test/PhpTransTestedByteArrays.java");
 	}
+
+	@Test
+	public void			testTryBlock() throws FileNotFoundException, IOException
+	{
+		runSingleFileTest("net/dryuf/trans/php/test/PhpTransTestedTryBlock.java");
+	}
 }

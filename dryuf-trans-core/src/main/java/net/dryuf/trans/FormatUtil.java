@@ -103,6 +103,17 @@ public class FormatUtil extends java.lang.Object
 			return indentString(s).insert(0, "\n");
 	}
 
+	public static String		insertIntoBlock(String block, String content)
+	{
+		content = indentString(content).toString();
+		if (block.startsWith("{\n")) {
+			return block.substring(0, 2)+content+block.substring(2);
+		}
+		else {
+			return "{\n"+block+content+"}\n";
+		}
+	}
+
 	public static String		tabalign(String s, int size)
 	{
 		StringBuilder sb = new StringBuilder(s);

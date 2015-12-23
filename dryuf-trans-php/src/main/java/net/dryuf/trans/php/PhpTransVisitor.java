@@ -64,6 +64,7 @@ import com.sun.source.tree.MethodInvocationTree;
 import com.sun.source.tree.MethodTree;
 import com.sun.source.tree.NewArrayTree;
 import com.sun.source.tree.Tree;
+import com.sun.source.tree.TryTree;
 import com.sun.source.tree.TypeParameterTree;
 import com.sun.source.tree.VariableTree;
 import com.sun.source.util.Trees;
@@ -927,6 +928,34 @@ public class PhpTransVisitor extends CLikeTransVisitor
 		result.updateEmptyExpressionPriority(getPriorityLiteral());
 		return result;
 	}
+
+	@Override
+	public VisitResult		visitTry(TryTree node, Trees trees)
+	{
+		VisitResult result = new VisitResult("try");
+		StringBuilder resources = null;
+		if (node.getResources() != null && node.getResources().size() > 0) {
+			resources = new StringBuilder();
+			for (Tree resourceTree: node.getResources()) {
+				resources.append(FormatUtil.forceEnding(scan(resourceTree, trees).getContent(), ";\n"));
+			}
+		}
+		String block = scan(node.getBlock(), trees).getContent();
+		if (resources != null) {
+			block = FormatUtil.insertIntoBlock(block, resources.toString());
+		}
+		result.appendSb(FormatUtil.indentStatementString(block));
+		result.appendSafe(scan(node.getCatches(), trees));
+		if (node.getFinallyBlock() != null) {
+			result.appendString("finally ");
+			result.appendSafe(scan(node.getFinallyBlock(), trees));
+		}
+		else if (resources != null) {
+			result.appendString("finally {\n}\n");
+		}
+		return result;
+	}
+
 
 	@SuppressWarnings("unchecked")
 	public static Map<String, Class<TransClassAdapter>> defaultClassAdapterMappings = TransUtil.createLinkedHashMap(
