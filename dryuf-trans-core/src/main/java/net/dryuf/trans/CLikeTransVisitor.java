@@ -260,16 +260,24 @@ public abstract class CLikeTransVisitor extends TransVisitor
 	@Override
 	public VisitResult		visitReturn(ReturnTree node, Trees trees)
 	{
-		VisitResult result = this.visitExpression(node.getExpression(), trees);
-		if (result == null || result.isNull()) {
-			result = new VisitResult("return")
-				.updateResultClass(void.class);
+		try {
+			VisitResult result = this.visitExpression(node.getExpression(), trees);
+			if (result == null || result.isNull()) {
+				result = new VisitResult("return")
+						.updateResultClass(void.class);
+			}
+			else {
+				result.prependString("return ");
+			}
+			result.appendString(";\n");
+			return result
+					.updateResultIndicator(VisitResult.RI_Return);
 		}
-		else {
-			result.prependString("return ");
+		catch (Exception ex) {
+			getLogger().error(ex.toString(), ex);
+			return new VisitResult(surroundFix(FormatUtil.forceEnding(node.toString(), ";"), ex).toString()+"\n")
+					.updateResultIndicator(VisitResult.RI_Return);
 		}
-		result.appendString(";\n");
-		return result.updateResultIndicator(VisitResult.RI_Return);
 	}
 
 	@Override
