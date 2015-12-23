@@ -62,6 +62,7 @@ import com.sun.source.tree.TryTree;
 import com.sun.source.tree.VariableTree;
 import com.sun.source.tree.WhileLoopTree;
 import com.sun.source.util.Trees;
+import org.apache.commons.lang3.StringUtils;
 
 
 public abstract class CLikeTransVisitor extends TransVisitor
@@ -281,6 +282,8 @@ public abstract class CLikeTransVisitor extends TransVisitor
 	public VisitResult		visitTry(TryTree node, Trees trees)
 	{
 		VisitResult result = new VisitResult("try");
+		if (node.getResources() != null && node.getResources().size() > 0)
+			result.appendString(surroundFix(StringUtils.join(node.getResources(), ", "), null));
 		result.appendSb(FormatUtil.indentStatementString(scan(node.getBlock(), trees).getContent()));
 		result.appendSafe(scan(node.getCatches(), trees));
 		if (node.getFinallyBlock() != null) {
