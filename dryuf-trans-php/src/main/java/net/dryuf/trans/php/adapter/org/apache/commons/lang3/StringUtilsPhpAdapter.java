@@ -67,7 +67,7 @@ public class StringUtilsPhpAdapter extends BasicPhpAdapter
 			return new VisitResult(sb.toString());
 		}
 		else if (method.getName().equals("defaultIfEmpty")) {
-			sb.append("\\net\\dryuf\\text\\util\\StringUtil::defaultIfEmpty(");
+			sb.append("\\net\\dryuf\\core\\StringUtil::defaultIfEmpty(");
 			appendArgumentsDirect(sb, node.getArguments(), trees);
 			if (arguments.size() == 1)
 				sb.append(", ''");
