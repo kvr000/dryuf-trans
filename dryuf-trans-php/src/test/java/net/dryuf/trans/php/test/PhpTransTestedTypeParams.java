@@ -57,7 +57,7 @@ public class PhpTransTestedTypeParams<T, U extends String> extends HashMap<T, U>
 	public U			put(T key, U value)
 	{
 		if (get(key) != null)
-			value = (U)(get(key)+value);
+			value = (U)((String) get(key)+value);
 		super.put(key, value);
 		return value;
 	}
