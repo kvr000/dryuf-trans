@@ -18,7 +18,7 @@
 		<reflections.version>0.9.10</reflections.version>
 		<guava.version>18.0</guava.version>
 
-		<log4j.version>2.2</log4j.version>
+		<log4j.version>2.12.4</log4j.version>
 
 		<junit.version>4.11</junit.version>
 		<xmlunit.version>1.5</xmlunit.version>
